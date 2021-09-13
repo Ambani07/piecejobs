@@ -29,13 +29,6 @@ export const SettingsScreen = ({ navigation }) => {
       <List.Section>
         <SettingsItem
           style={{ padding: 16 }}
-          title="Favourites"
-          description="View your favourites"
-          left={(props) => <List.Icon {...props} color="black" icon="heart" />}
-          onPress={() => navigation.navigate("Favourites")}
-        />
-        <SettingsItem
-          style={{ padding: 16 }}
           title="Logout"
           left={(props) => <List.Icon {...props} color="black" icon="door" />}
           onPress={onLogout}

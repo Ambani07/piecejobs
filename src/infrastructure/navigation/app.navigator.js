@@ -18,13 +18,19 @@ import { RestaurantsContextProvider } from "../../services/restaurants/restauran
 import { JobsBar } from "../../components/home/home-info.component";
 import { HomeScreen } from "../../features/home/screens/home.screen";
 import { HomeNavigator } from "./home.navigator";
+import { JobsNavigator } from "./jobs.navigator";
+import { NotificationsNavigator } from "./notification.navigator";
 
 const Tab = createBottomTabNavigator();
 
 const TAB_ICON = {
   Home: "md-home",
 
-  Map: "md-map",
+  Jobs: "md-search",
+
+  Notifications: "md-mail",
+
+  // Map: "md-map",
 
   Settings: "md-settings",
 };
@@ -49,7 +55,11 @@ export const AppNavigator = () => (
         <Tab.Navigator screenOptions={createScreenOptions}>
           <Tab.Screen name="Home" component={HomeNavigator} />
 
-          <Tab.Screen name="Map" component={MapScreen} />
+          <Tab.Screen name="Jobs" component={JobsNavigator} />
+
+          <Tab.Screen name="Notifications" component={NotificationsNavigator} />
+
+          {/* <Tab.Screen name="Map" component={MapScreen} /> */}
 
           <Tab.Screen name="Settings" component={SettingsNavigator} />
         </Tab.Navigator>
