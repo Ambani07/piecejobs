@@ -15,6 +15,9 @@ import { AuthenticationContext } from "../../services/authentification/authentif
 import { FavouritesContextProvider } from "../../services/favourites/favourites.context";
 import { LocationContextProvider } from "../../services/location/location.context";
 import { RestaurantsContextProvider } from "../../services/restaurants/restaurants.context";
+import { JobsBar } from "../../components/home/home-info.component";
+import { HomeScreen } from "../../features/home/screens/home.screen";
+import { HomeNavigator } from "./home.navigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -44,7 +47,7 @@ export const AppNavigator = () => (
     <LocationContextProvider>
       <RestaurantsContextProvider>
         <Tab.Navigator screenOptions={createScreenOptions}>
-          <Tab.Screen name="Home" component={RestaurantsNavigator} />
+          <Tab.Screen name="Home" component={HomeNavigator} />
 
           <Tab.Screen name="Map" component={MapScreen} />
 

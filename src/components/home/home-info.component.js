@@ -20,8 +20,9 @@ const JobsWrapper = styled.View`
 
 const CompactImage = styled.Image`
   border-radius: 10px;
-  width: 120px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
+  /* background-color: red; */
 `;
 
 const CompactWebview = styled(WebView)`
@@ -31,41 +32,33 @@ const CompactWebview = styled(WebView)`
 `;
 
 const isAndroid = Platform.OS === "android";
-export const JobsBar = ({ jobs, onNavigate }) => {
-  const Image = isAndroid ? CompactWebview : CompactImage;
-  if (!jobs.length) {
-    return null;
-  }
+export const JobsBar = ({ categories, onNavigate }) => {
+  const Image = CompactImage;
+  const { title, list } = categories;
+
   return (
     <JobsWrapper>
       <Spacer variant="left.large">
-        <Text variant="caption">Jobs</Text>
+        <Text variant="caption">{title}</Text>
       </Spacer>
 
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {jobs.map((job) => {
-          const key = job.name;
-          return (
-            <Spacer key={key} position="left" size="medium">
-              <TouchableOpacity
-                onPress={() =>
-                  onNavigate("RestaurantDetails", {
-                    job,
-                  })
-                }
-              >
-                <Item>
-                  <Image
-                    source={require("../../../assets/maintenance/electrician.png")}
-                  />
-                  <Text center variant="caption" numberOfLines={3}>
-                    {job.name}
-                  </Text>
-                </Item>
-              </TouchableOpacity>
-            </Spacer>
-          );
-        })}
+        {list.map((category) => (
+          <Spacer key={category.name} position="left" size="medium">
+            <TouchableOpacity
+              onPress={() =>
+                onNavigate("JobCategoryList", {
+                  category: category,
+                })
+              }
+            >
+              <Item>
+                <Image source={category.icon} />
+                <Text variant="caption">{category.name}</Text>
+              </Item>
+            </TouchableOpacity>
+          </Spacer>
+        ))}
       </ScrollView>
     </JobsWrapper>
   );

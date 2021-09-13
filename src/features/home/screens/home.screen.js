@@ -8,9 +8,9 @@ import { SafeArea } from "../../../components/utility/safe-area.component";
 
 import { ActivityIndicator, Colors } from "react-native-paper";
 import { Search } from "../components/search.component";
-import { FavouritesContext } from "../../../services/favourites/favourites.context";
-import { FavouritesBar } from "../../../components/favourites/favourites-bar.component";
 import { JobsBar } from "../../../components/home/home-info.component";
+
+import { jobCategories } from "./home.data";
 
 const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
@@ -24,21 +24,10 @@ const LoadingContainer = styled.View`
 
 const SearchContainer = styled.View`
   padding: ${(props) => props.theme.space[1]};
+  margin-bottom: 64px;
 `;
 
 export const HomeScreen = ({ navigation }) => {
-  const jobs = [
-    {
-      id: 1,
-      name: "job 1",
-      icon: "plug",
-    },
-    {
-      id: 2,
-      name: "job 2",
-      icon: "user",
-    },
-  ];
   const [isToggled, setIsToggle] = useState(true);
 
   return (
@@ -54,7 +43,17 @@ export const HomeScreen = ({ navigation }) => {
           onFavouritesToggle={() => setIsToggle(!isToggled)}
           placeholder="search for a location"
         />
-        {isToggled && <JobsBar jobs={jobs} onNavigate={navigation.navigate} />}
+
+        <FlatList
+          data={jobCategories}
+          renderItem={({ item }) => (
+            <Spacer position="bottom" size="large">
+              <JobsBar categories={item} onNavigate={navigation.navigate} />
+            </Spacer>
+          )}
+          keyExtractor={(item) => item.title}
+          contentContainerStyle={{ padding: 8 }}
+        />
       </SearchContainer>
     </SafeArea>
   );
